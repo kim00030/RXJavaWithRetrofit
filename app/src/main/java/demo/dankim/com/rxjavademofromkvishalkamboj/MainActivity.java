@@ -1,86 +1,58 @@
 package demo.dankim.com.rxjavademofromkvishalkamboj;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
-import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import demo.dankim.com.rxjavademofromkvishalkamboj.adapter.RecyclerAdapter;
 import demo.dankim.com.rxjavademofromkvishalkamboj.databinding.ActivityMainBinding;
 import demo.dankim.com.rxjavademofromkvishalkamboj.model.Hero;
-import demo.dankim.com.rxjavademofromkvishalkamboj.remote.RetrofitClient;
-import io.reactivex.Observable;
-import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
+import demo.dankim.com.rxjavademofromkvishalkamboj.viewmodel.HeroViewModel;
 
 public class MainActivity extends AppCompatActivity implements IMainActivity {
 
-    private static final String TAG = "MainActivity";
-    private ActivityMainBinding activityMainBinding;
-    private Disposable disposable;
     private RecyclerAdapter recyclerAdapter;
+    private HeroViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        ActivityMainBinding activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         activityMainBinding.setIMainActivity(this);
 
         activityMainBinding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        List<Hero> heroList = new ArrayList<>();
+        recyclerAdapter = new RecyclerAdapter(heroList);
+        activityMainBinding.recyclerView.setAdapter(recyclerAdapter);
 
+        viewModel = ViewModelProviders.of(this).get(HeroViewModel.class);
+        viewModel.getListMutableLiveData().observe(this, new android.arch.lifecycle.Observer<List<Hero>>() {
+            @Override
+            public void onChanged(@Nullable List<Hero> heroes) {
+                recyclerAdapter.setHeroList(heroes);
+
+            }
+        });
     }
-
 
     /**
      * When pressing the button for fetching data
      */
     @Override
     public void fetchData() {
-
-        loadJson();
-
-    }
-
-    private void loadJson() {
-
-        Observable<List<Hero>> heroListObservable = RetrofitClient.getInstance().getApi().getHeroList();
-        heroListObservable.subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<List<Hero>>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-                        disposable = d;
-                    }
-
-                    @Override
-                    public void onNext(List<Hero> heroes) {
-                        Log.d(TAG, "onNext: " + heroes);
-                        activityMainBinding.recyclerView.setAdapter(new RecyclerAdapter(heroes));
-                        activityMainBinding.recyclerView.setHasFixedSize(true);
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Log.d(TAG, "onError: " + e.getMessage());
-                    }
-
-                    @Override
-                    public void onComplete() {
-                        Log.d(TAG, "onComplete: ");
-                    }
-                });
+        viewModel.sendRequest();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (disposable != null) {
-            disposable.dispose();
-        }
+        viewModel.dispose();
+
     }
 }

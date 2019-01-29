@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!--Data binding for IMainActivity interface-->
     <data>
 
         <variable
@@ -19,14 +20,13 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        </android.support.v7.widget.RecyclerView>
+            android:layout_height="wrap_content" />
 
         <Button
-            android:layout_alignParentBottom="true"
             android:id="@+id/btn_fetch_data"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
             android:onClick="@{()->iMainActivity.fetchData()}"
             android:text="Click" />
 

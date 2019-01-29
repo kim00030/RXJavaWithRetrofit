@@ -3,9 +3,7 @@ package demo.dankim.com.rxjavademofromkvishalkamboj.remote;
 import java.util.List;
 
 import demo.dankim.com.rxjavademofromkvishalkamboj.model.Hero;
-import demo.dankim.com.rxjavademofromkvishalkamboj.model.HeroList;
 import io.reactivex.Observable;
-import retrofit2.Call;
 import retrofit2.http.GET;
 
 /**
@@ -17,7 +15,5 @@ public interface ApiService {
 
     @GET("marvel")
     Observable<List<Hero>> getHeroList();
-
-
 
 }
