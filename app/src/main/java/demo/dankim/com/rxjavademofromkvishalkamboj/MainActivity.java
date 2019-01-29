@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
                     @Override
                     public void onNext(List<Hero> heroes) {
                         Log.d(TAG, "onNext: " + heroes);
-                        activityMainBinding.recyclerView.setAdapter(new RecyclerAdapter(MainActivity.this.getApplicationContext(), heroes));
+                        activityMainBinding.recyclerView.setAdapter(new RecyclerAdapter(heroes));
                         activityMainBinding.recyclerView.setHasFixedSize(true);
                     }
 

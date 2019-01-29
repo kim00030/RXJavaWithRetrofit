@@ -1,71 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="16dp">
 
-    <TextView
-        android:id="@+id/tv_name"
-        android:layout_width="wrap_content"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!--Data binding with Hero data -->
+    <data>
+        <variable
+            name="hero"
+            type="demo.dankim.com.rxjavademofromkvishalkamboj.model.Hero" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:text="name"
-        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large" />
+        android:orientation="vertical"
+        android:padding="16dp">
 
-    <TextView
-        android:id="@+id/tv_real_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:text="real name"
-        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium" />
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="@{hero.name}"
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+            tools:text="name" />
 
-    <TextView
-        android:id="@+id/tv_team"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:text="Team"
-        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium" />
+        <TextView
+            android:id="@+id/tv_real_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="@{hero.realName}"
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+            tools:text="real name" />
 
-    <TextView
-        android:id="@+id/tv_first_appearance"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:text="First appearance"
-        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium" />
+        <TextView
+            android:id="@+id/tv_team"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="@{hero.team}"
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+            tools:text="Team" />
 
-    <TextView
-        android:id="@+id/tv_created_by"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Joe Simon"
-        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium" />
+        <TextView
+            android:id="@+id/tv_first_appearance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="@{hero.firstAppearance}"
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+            tools:text="First appearance" />
 
-    <TextView
-        android:id="@+id/tv_publisher"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:text="Marvel comics"
-        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium" />
+        <TextView
+            android:id="@+id/tv_created_by"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{hero.createdBy}"
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+            tools:text="Joe Simon" />
 
-    <TextView
-        android:id="@+id/tv_image_url"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:text="https://www.simplifiedcoding.net/demos/marvel/captainamerica.jpg"
-        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small" />
+        <TextView
+            android:id="@+id/tv_publisher"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="Marvel comics"
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+            tools:text="@{hero.publisher}" />
 
-    <TextView
-        android:id="@+id/tv_bio"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:text=" Steven Rogers was born in the Lower East Side of Manhattan, New York City, in 1925 to poor Irish immigrants, Sarah and Joseph Rogers.[54] Joseph died when Steve was a child, and Sarah died of pneumonia while Steve was a teen. By early 1940, before America's entry into World War II, Rogers is a tall, scrawny fine arts student specializing in illustration and a comic book writer and artist. " />
+        <TextView
+            android:id="@+id/tv_image_url"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="@{hero.imageUrl}"
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
+            tools:text="https://www.simplifiedcoding.net/demos/marvel/captainamerica.jpg" />
+
+        <TextView
+            android:id="@+id/tv_bio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="@{hero.bio}"
+            tools:text="Steven Rogers was born in the Lower East Side of Manhattan, New York City, in 1925 to poor Irish immigrants, Sarah and Joseph Rogers.[54] Joseph died when Steve was a child, and Sarah died of pneumonia while Steve was a teen. By early 1940, before America's entry into World War II, Rogers is a tall, scrawny fine arts student specializing in illustration and a comic book writer and artist." />
 
 
-</LinearLayout>
+    </LinearLayout>
+
+</layout>
