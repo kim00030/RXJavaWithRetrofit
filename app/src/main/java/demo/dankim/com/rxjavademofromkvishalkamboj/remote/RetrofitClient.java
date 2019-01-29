@@ -14,7 +14,6 @@ public class RetrofitClient {
     private static RetrofitClient instance;
     private final Retrofit retrofit;
 
-
     /**
      * I need
      * addCallAdapterFactory(RxJava2CallAdapterFactory.create())

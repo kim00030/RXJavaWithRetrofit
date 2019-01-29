@@ -23,15 +23,20 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Initialize DataBinding with activity_main.xml
         ActivityMainBinding activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        //Set IMainActivity to Bind
         activityMainBinding.setIMainActivity(this);
-
+        // set LayoutManager to RecyclerView
         activityMainBinding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        // set empty list to RecyclerView adapter
         List<Hero> heroList = new ArrayList<>();
         recyclerAdapter = new RecyclerAdapter(heroList);
+        // set adapter to RecyclerView
         activityMainBinding.recyclerView.setAdapter(recyclerAdapter);
-
+        // Initialize ViewModel
         viewModel = ViewModelProviders.of(this).get(HeroViewModel.class);
+        // Observe Data
         viewModel.getListMutableLiveData().observe(this, new android.arch.lifecycle.Observer<List<Hero>>() {
             @Override
             public void onChanged(@Nullable List<Hero> heroes) {

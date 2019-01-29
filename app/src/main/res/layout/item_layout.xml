@@ -65,9 +65,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:text="Marvel comics"
+            android:text="@{hero.publisher}"
             android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
-            tools:text="@{hero.publisher}" />
+            tools:text="Marvel comics" />
 
         <TextView
             android:id="@+id/tv_image_url"

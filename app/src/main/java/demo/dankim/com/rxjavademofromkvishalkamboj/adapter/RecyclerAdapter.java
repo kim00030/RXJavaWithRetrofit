@@ -5,7 +5,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import demo.dankim.com.rxjavademofromkvishalkamboj.databinding.ItemLayoutBinding;
@@ -16,9 +15,8 @@ import demo.dankim.com.rxjavademofromkvishalkamboj.model.Hero;
  */
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ItemViewHolder> {
 
-    private List<Hero> heroList = new ArrayList<>();
+    private List<Hero> heroList;
     private LayoutInflater layoutInflater;
-
 
     public RecyclerAdapter(List<Hero> heroes) {
 
@@ -29,11 +27,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ItemVi
     @Override
     public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
 
-
         if (layoutInflater == null) {
             layoutInflater = LayoutInflater.from(viewGroup.getContext());
         }
-
+        // get item layout binding object from item_layout.xml
         ItemLayoutBinding itemLayoutBinding = ItemLayoutBinding.inflate(layoutInflater, viewGroup, false);
         return new ItemViewHolder(itemLayoutBinding);
     }
